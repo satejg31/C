@@ -202,6 +202,73 @@ size_t string_lastchr(string_t *p_str, char character)
 		return (-1);
 }
 
+bool string_findsubstring(string_t *p_str, string_t *p_substring)
+{
+	u_int8_t index = 0;
+	if(p_str->string == NULL || p_substring->string == NULL)
+	{
+		fprintf(stderr, "ERROR : One of the string is NULL");
+		return (FALSE);
+	}
+
+	if(__str_length(p_str->string) < __str_length(p_substring->string))
+	{
+		fprintf(stderr, "Substring's length is greater than the given string");
+		return (FALSE);
+	}
+	
+	if(*(p_substring->string) == '\0')
+	{
+		fprintf(stderr, "Substring is empty");
+		return (FALSE);
+	}
+	
+	while(p_str->string[index] != '\0')
+	{
+		const char *temp1 = ((p_str->string) + index);
+		const char *temp2 = p_substring->string;
+
+		while(*temp1 == *temp2 && *temp1 != '\0' && *temp2 != '\0')
+		{
+			temp1++;
+			temp2++;
+		}
+
+		if(*temp2 == '\0')
+			return (TRUE);
+
+		index++;
+	}
+
+	return (FALSE);
+
+}
+
+size_t string_cspn(string_t *p_str1, string_t *p_str2)
+{ 
+	u_int8_t index1 = 0;
+	u_int8_t index2 = 0;
+
+	while(p_str1->string[index1] != '\0')
+	{
+		index2 = 0;
+		while(p_str2->string[index2] != '\0')
+		{
+			if(p_str1->string[index1] == p_str2->string[index2])
+			{	
+				printf("The same character is %c\n", p_str1->string[index1]);
+				printf("It is found at %u index for the string\n", index1);
+				return ((size_t) index1);
+			}
+			index2++;
+		}
+		
+		index1++;
+	}
+
+	return ((size_t)(0));	
+}
+
 status_t string_replace(string_t *p_str1, const char *replace_string)
 {
 	return (__str_replace(p_str1->string, replace_string));

@@ -139,7 +139,40 @@ int main(void)
                 printf("Character last found at index %ld\n", index);
 	print_delimiter_line();
 
+	string_replace(p_str6, "Hello World");
+	string_replace(p_str7, "World");
+	puts("Checking whether the substring is present in the given string or not : ");
+	show_string(p_str6, "Showing the string : ");
+	show_string(p_str7, "Showing the substring : ");
+	if(string_findsubstring(p_str6, p_str7))
+		printf("Substring is present !!!\n");
+	else
+		printf("Substring is not present !!!\n");
+	print_delimiter_line();
 
+	string_replace(p_str6, "Hello World");
+        string_replace(p_str7, "Dummy");
+        puts("Checking whether the substring is present in the given string or not : ");
+        show_string(p_str6, "Showing the string : ");
+        show_string(p_str7, "Showing the substring : ");
+        if(string_findsubstring(p_str6, p_str7))
+                printf("Substring is present !!!\n");
+        else
+                printf("Substring is not present !!!\n");
+        print_delimiter_line();
+	
+	string_replace(p_str6, "Hello World");
+        string_replace(p_str7, "Wow");
+        show_string(p_str6, "Showing the string : ");
+        show_string(p_str7, "Showing the substring : ");
+	index = string_cspn(p_str6, p_str7);
+	print_delimiter_line();
+
+
+	destroy_string(&p_str7);
+	destroy_string(&p_str6);
+	destroy_string(&p_str5);
+	destroy_string(&p_str4);
 	destroy_string(&p_str3);
 	destroy_string(&p_str2);
 	destroy_string(&p_str1);
